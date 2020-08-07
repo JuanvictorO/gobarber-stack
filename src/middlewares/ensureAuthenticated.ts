@@ -3,6 +3,12 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
+interface TokenPayLoad {
+    iat: number;
+    exp: number;
+    sub: string;
+}
+
 export default function ensureAuthenticated(
     request: Request,
     response: Response,
@@ -22,12 +28,19 @@ export default function ensureAuthenticated(
     A primeira parte, o "Bearrer", não vai existir, está antes da vírgula
     o token será atribuído a const token
     */
-    const [, token] = authHeader.split('');
+    const [, token] = authHeader.split(' ');
 
     try {
         const decoded = verify(token, authConfig.jwt.secret);
 
-        console.log(decoded);
+        const { sub } = decoded as TokenPayLoad;
+
+        // console.log(request);
+        request.user = {
+            id: sub,
+        };
+
+        console.log(request.user.id);
 
         return next();
     } catch {

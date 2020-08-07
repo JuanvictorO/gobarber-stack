@@ -17,6 +17,8 @@ const appointmentsRouter = Router();
 appointmentsRouter.use(ensureAuthenticated);
 
 appointmentsRouter.get('/', async (request, response) => {
+    // console.log(`Id do user: ${request.user}`);
+
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
     const appointments = await appointmentsRepository.find();
 
