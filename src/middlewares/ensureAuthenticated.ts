@@ -35,7 +35,6 @@ export default function ensureAuthenticated(
 
         const { sub } = decoded as TokenPayLoad;
 
-        // console.log(request);
         request.user = {
             id: sub,
         };
