@@ -39,8 +39,6 @@ export default function ensureAuthenticated(
             id: sub,
         };
 
-        console.log(request.user.id);
-
         return next();
     } catch {
         throw new Error('Invalid JWT token.');
