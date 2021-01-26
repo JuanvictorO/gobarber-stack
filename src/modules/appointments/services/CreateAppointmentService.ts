@@ -1,10 +1,9 @@
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
-import Appointment from '../entities/Appointment';
+import AppError from '@shared/errors/AppError';
+import Appointment from '../infra/typeorm/entities/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
-
-import AppError from '../../../shared/errors/AppError';
 
 // TODO SERVICE TEM UM ÚNICO MÉTODO
 // Não tem acesso aos dados da requisitação e resposta
