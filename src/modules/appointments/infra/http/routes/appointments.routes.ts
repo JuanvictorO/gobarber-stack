@@ -8,7 +8,6 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 // Rota: Receber requisição, chamar outro arquivo, devolver uma resposta // Trabalha o dado
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 /*
     É verificada a autenticação em todas as rotas
     Caso queira aplicar a verificação em rotas específicas, use ex: get('/', ensureAuthenticated, async ...)
@@ -27,6 +26,7 @@ appointmentsRouter.post('/', async (request, response) => {
 
     const parsedDate = parseISO(date);
 
+    const appointmentsRepository = new AppointmentsRepository();
     const createAppointment = new CreateAppointmentService(
         appointmentsRepository,
     );
